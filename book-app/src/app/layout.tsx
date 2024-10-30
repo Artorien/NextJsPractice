@@ -5,6 +5,7 @@ import Header from "@/components/header-component/Header";
 import Sidebar from "@/components/sidebar-component/Side-bar";
 import ClientLayout from "@/components/client-layout-component/client-layout";
 import { Toaster } from "@/components/ui/sonner";
+import AuthProvider from "@/contexts/Auth-context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,7 +36,9 @@ export default function RootLayout({
         <Header></Header>
         <div className="flex">
           <Sidebar></Sidebar>
-          <ClientLayout>{children}</ClientLayout>
+          <AuthProvider>
+            <ClientLayout>{children}</ClientLayout>
+          </AuthProvider>
           <Toaster></Toaster>
         </div>
       </body>

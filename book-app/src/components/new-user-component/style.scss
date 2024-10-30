@@ -1,0 +1,23 @@
+.signin {
+  background-color: black;
+  transition: all 0.4s;
+  color: white;
+
+  &:hover {
+    background-color: rgb(48, 47, 47);
+    transition: 0.4s all;
+    color: white;
+  }
+}
+
+.signup {
+  background-color: white;
+  transition: all 0.4s;
+  color: black;
+
+  &:hover {
+    background-color: #f7f7f7;
+    transition: 0.4s all;
+    color: black;
+  }
+}
