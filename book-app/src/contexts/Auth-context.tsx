@@ -10,7 +10,16 @@ import {
 } from "react";
 import { toast } from "sonner";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+  user: null,
+  error: "",
+  registration: async (email: string, password: string) => {},
+  verification: async (token: string) => {},
+  verificationMessage: "",
+  login: async (email: string, password: string) => {},
+  loginMessage: "",
+  logout: () => {},
+});
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -39,9 +48,9 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       }),
     });
     if (!response.ok) {
-      setError(await response.json());
+      setError(await response.text());
     } else {
-      setError("");
+      toast("Check your email for verification");
     }
   };
 
@@ -58,7 +67,10 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       const userData = await response.json();
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
-      router.push("/profile");
+      toast("You`ve logged in");
+      setTimeout(() => {
+        router.push("/profile");
+      }, 1000);
     } else {
       setLoginMessage(await response.json());
     }
@@ -68,6 +80,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     const response = await fetch(url + "verification?token=" + token);
     if (response.ok) {
       const userData = await response.json();
+      setUser(userData);
       setVerificationMessage("Email has been successfully verified");
       localStorage.setItem("user", JSON.stringify(userData));
       toast("You`re registered");
@@ -79,16 +92,23 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    router.push("/profile");
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
+        error,
         registration,
         verification,
-        error,
         verificationMessage,
         login,
         loginMessage,
+        logout,
       }}
     >
       {children}

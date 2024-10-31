@@ -33,7 +33,7 @@ public class UserService {
 
     public void sendEmail(User user, String token) {
         String subject = "Email Verification";
-        String verificationURL = "http://localhost:3000/verify?token=" + token;
+        String verificationURL = "http://localhost:3000/verification?token=" + token;
         String message = "Please click the following link to verify your email: " + verificationURL;
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();

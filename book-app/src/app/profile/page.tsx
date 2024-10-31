@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useAuth } from "@/contexts/Auth-context";
 import Choice from "@/components/new-user-component/Registration-or-login";

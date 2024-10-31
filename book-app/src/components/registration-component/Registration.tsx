@@ -25,7 +25,6 @@ export default function Registration() {
         >
           <div className="flex gap-8">
             <div className="flex flex-col">
-              <p>{error}</p>
               <label htmlFor="email" className="mb-[5px]">
                 Email
               </label>
@@ -37,6 +36,7 @@ export default function Registration() {
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {error && <p className="mt-[5px] text-red-600">{error}</p>}
             </div>
             <div className="flex flex-col">
               <label htmlFor="password" className="mb-[5px]">

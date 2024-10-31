@@ -4,18 +4,15 @@ public class UserBody
 {
     private String email;
     private String password;
-    private String token;
 
     public UserBody() {
 
     }
 
     public UserBody(String email,
-                    String password,
-                    String token) {
+                    String password) {
         this.email = email;
         this.password = password;
-        this.token = token;
     }
 
     public String getEmail() {
@@ -32,13 +29,5 @@ public class UserBody
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getToken() {
-        return this.token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

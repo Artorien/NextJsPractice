@@ -1,14 +1,15 @@
+"use client"
+
 import { useAuth } from "@/contexts/Auth-context";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 export default function VerificationProcess() {
   const { verification, verificationMessage } = useAuth();
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
 
   useEffect(() => {
-    const token = router.query;
     verification(token);
   }, []);
 

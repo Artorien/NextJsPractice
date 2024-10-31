@@ -7,9 +7,10 @@ import { useAuth } from "@/contexts/Auth-context";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loginMessage, login } = useAuth;
+  const { loginMessage, login } = useAuth();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     login(email, password);
   };
 

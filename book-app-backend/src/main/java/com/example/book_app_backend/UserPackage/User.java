@@ -18,7 +18,6 @@ public class User {
     private String dateOfCreation;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
-    private String image;
     private String token;
 
     public User() {
@@ -30,14 +29,12 @@ public class User {
                 String password,
                 String dateOfCreation,
                 List<Purchase> purchases,
-                String image,
                 String token) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.dateOfCreation = dateOfCreation;
         this.purchases = purchases;
-        this.image = image;
         this.token = token;
     }
 
@@ -79,14 +76,6 @@ public class User {
 
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
-    }
-
-    public String getImage() {
-        return this.image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getToken() {

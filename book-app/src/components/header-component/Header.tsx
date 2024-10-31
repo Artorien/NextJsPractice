@@ -3,8 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import "./style.scss";
+import { useAuth } from "@/contexts/Auth-context";
+import { button } from "framer-motion/client";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+  const { user, logout } = useAuth()
+
   return (
     <header className="flex py-[35px] px-[50px] justify-between overflow-hidden header-element mb-[50px]">
       <motion.div
@@ -13,7 +18,9 @@ export default function Header() {
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
       >
-        <h1 className="text-[2rem] p-0">MyBook</h1>
+        <Link href={"/about"}>
+          <h1 className="text-[2rem] p-0">MyBook</h1>
+        </Link>
         <div className="relative">
           <motion.input
             type="text"
@@ -43,13 +50,27 @@ export default function Header() {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
       >
-        <Link href={"/profile"}>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeGnT4JDrTDMUXbVYJOcKk1Znmy_V-vck7Ng&s"
-            alt="profile-image"
-            className="w-[40px] h-[40px] rounded-[50%]"
-          />
-        </Link>
+        {user == null ? (
+          <>
+            <Link href={"/registration"}>
+              <button className="border rounded-2xl py-[5px] px-[15px] text-[1.3rem] signup mr-[25px]">
+                Sign Up
+              </button>
+            </Link>
+            <Link href={"/login"}>
+              <button className="border rounded-2xl py-[5px] px-[15px] text-[1.3rem] signin">
+                Sign In
+              </button>
+            </Link>
+          </>
+        ) : (
+          <button
+            className="border rounded-2xl py-[5px] px-[15px] text-[1.3rem] logout"
+            onClick={logout}
+          >
+            Log Out
+          </button>
+        )}
       </motion.div>
     </header>
   );
